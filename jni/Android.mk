@@ -4,6 +4,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE     := libvoikko-jni
 LOCAL_CPP_FEATURES += exceptions
+LOCAL_CFLAGS := -DHAVE_MALAGA
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/corevoikko/libvoikko/src
 LOCAL_SRC_FILES  := \
 	corevoikko/libvoikko/src/morphology/interface.cpp \
