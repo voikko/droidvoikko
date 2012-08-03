@@ -47,7 +47,10 @@ public class VoikkoSpellCheckerService extends SpellCheckerService {
 		
 		@Override
 		public SuggestionsInfo onGetSuggestions(TextInfo textInfo, int suggestionsLimit) {
-			throw new UnsupportedOperationException("Not implemented");
+			return new SuggestionsInfo(
+				SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO |
+				SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS,
+				new String[] { "kissa" });
 		}
 	}
 }
