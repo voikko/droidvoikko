@@ -30,4 +30,5 @@
 <resources>
     <string name="app_name">VoikkoSpellCheckerService</string>
     <string name="spellchecker_name">Voikko spell checker</string>
+    <string name="subtype_generic" translatable="false">%s</string>
 </resources>

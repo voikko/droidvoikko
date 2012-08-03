@@ -29,8 +29,25 @@
 
 package org.puimula.droidvoikko;
 import android.service.textservice.SpellCheckerService;
+import android.view.textservice.SuggestionsInfo;
+import android.view.textservice.TextInfo;
 
 public class VoikkoSpellCheckerService extends SpellCheckerService {
 	
+	@Override
+	public Session createSession() {
+		return new VoikkoSpellCheckerSession();
+	}
 	
+	private static class VoikkoSpellCheckerSession extends Session {
+		
+		@Override
+		public void onCreate() {
+		}
+		
+		@Override
+		public SuggestionsInfo onGetSuggestions(TextInfo textInfo, int suggestionsLimit) {
+			throw new UnsupportedOperationException("Not implemented");
+		}
+	}
 }
