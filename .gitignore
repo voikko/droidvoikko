@@ -2,4 +2,5 @@
 local.properties
 bin
 gen
+obj
 
