@@ -27,33 +27,15 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
  */
 
-package org.puimula.droidvoikko;
-import android.service.textservice.SpellCheckerService;
-import android.view.textservice.SuggestionsInfo;
-import android.view.textservice.TextInfo;
+#include <jni.h>
+#include "voikko.h"
 
-public class VoikkoSpellCheckerService extends SpellCheckerService {
-	
-	@Override
-	public Session createSession() {
-		return new VoikkoSpellCheckerSession();
-	}
-	
-	private static class VoikkoSpellCheckerSession extends Session {
-		
-		Voikko voikko;
-		
-		@Override
-		public void onCreate() {
-			voikko = new Voikko("fi");
-		}
-		
-		@Override
-		public SuggestionsInfo onGetSuggestions(TextInfo textInfo, int suggestionsLimit) {
-			return new SuggestionsInfo(
-				SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO |
-				SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS,
-				new String[] { "kissa" });
-		}
-	}
+jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv* env, jobject thiz, jstring langCode) {
+	const char * voikkoError;
+	jboolean isCopy;
+	const char * utfLang = env->GetStringUTFChars(langCode, &isCopy);
+	// TODO: handle error
+	VoikkoHandle * handle = voikkoInit(&voikkoError, utfLang, 0);
+	env->ReleaseStringUTFChars(langCode, utfLang);
+	return reinterpret_cast<jlong>(handle);
 }

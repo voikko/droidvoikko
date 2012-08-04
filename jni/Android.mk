@@ -7,6 +7,7 @@ LOCAL_CPP_FEATURES += exceptions
 LOCAL_CFLAGS := -DHAVE_MALAGA
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/corevoikko/libvoikko/src
 LOCAL_SRC_FILES  := \
+	voikko-jni.cpp \
 	corevoikko/libvoikko/src/morphology/interface.cpp \
 	corevoikko/libvoikko/src/morphology/AnalyzerFactory.cpp \
 	corevoikko/libvoikko/src/morphology/Analysis.cpp \

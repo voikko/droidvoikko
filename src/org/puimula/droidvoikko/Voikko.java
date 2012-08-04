@@ -28,32 +28,18 @@
  */
 
 package org.puimula.droidvoikko;
-import android.service.textservice.SpellCheckerService;
-import android.view.textservice.SuggestionsInfo;
-import android.view.textservice.TextInfo;
 
-public class VoikkoSpellCheckerService extends SpellCheckerService {
+public class Voikko {
 	
-	@Override
-	public Session createSession() {
-		return new VoikkoSpellCheckerSession();
+	final long nativeHandle;
+	
+	public Voikko(String langCode) {
+		nativeHandle = init(langCode);
 	}
 	
-	private static class VoikkoSpellCheckerSession extends Session {
-		
-		Voikko voikko;
-		
-		@Override
-		public void onCreate() {
-			voikko = new Voikko("fi");
-		}
-		
-		@Override
-		public SuggestionsInfo onGetSuggestions(TextInfo textInfo, int suggestionsLimit) {
-			return new SuggestionsInfo(
-				SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO |
-				SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS,
-				new String[] { "kissa" });
-		}
+	public native long init(String langCode);
+	
+	static {
+		System.loadLibrary("voikko-jni");
 	}
 }
