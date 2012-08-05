@@ -32,7 +32,7 @@
 
 extern "C" {
 
-jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv* env, jobject thiz, jstring langCode, jstring path) {
+jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv * env, jobject thiz, jstring langCode, jstring path) {
 	const char * voikkoError;
 	jboolean isCopyLang;
 	const char * utfLang = env->GetStringUTFChars(langCode, &isCopyLang);
@@ -43,6 +43,15 @@ jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv* env, jobject thiz, jstrin
 	env->ReleaseStringUTFChars(path, utfPath);
 	env->ReleaseStringUTFChars(langCode, utfLang);
 	return reinterpret_cast<jlong>(handle);
+}
+
+jint Java_org_puimula_droidvoikko_Voikko_spell(JNIEnv * env, jobject thiz, jint handle, jstring word) {
+	VoikkoHandle * handlePtr = reinterpret_cast<VoikkoHandle *>(handle);
+	jboolean isCopy;
+	const char * utfWord = env->GetStringUTFChars(word, &isCopy);
+	int result = voikkoSpellCstr(handlePtr, utfWord);
+	env->ReleaseStringUTFChars(word, utfWord);
+	return result;
 }
 
 }

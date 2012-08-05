@@ -37,7 +37,14 @@ public class Voikko {
 		nativeHandle = init(langCode, path);
 	}
 	
-	public native long init(String langCode, String path);
+	public boolean spell(String word) {
+		int spellResult = spell(nativeHandle, word);
+		return spellResult != 0;
+	}
+	
+	private native long init(String langCode, String path);
+	
+	private native int spell(long handle, String word);
 	
 	static {
 		System.loadLibrary("voikko-jni");

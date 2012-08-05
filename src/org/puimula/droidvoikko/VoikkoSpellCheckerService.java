@@ -52,6 +52,9 @@ public class VoikkoSpellCheckerService extends SpellCheckerService {
 		
 		@Override
 		public SuggestionsInfo onGetSuggestions(TextInfo textInfo, int suggestionsLimit) {
+			if (voikko.spell(textInfo.getText())) {
+				return new SuggestionsInfo(SuggestionsInfo.RESULT_ATTR_IN_THE_DICTIONARY, new String[] {});
+			}
 			return new SuggestionsInfo(
 				SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO |
 				SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS,
