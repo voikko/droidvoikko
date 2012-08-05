@@ -45,7 +45,7 @@ jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv * env, jobject thiz, jstri
 	return reinterpret_cast<jlong>(handle);
 }
 
-jint Java_org_puimula_droidvoikko_Voikko_spell(JNIEnv * env, jobject thiz, jint handle, jstring word) {
+jint Java_org_puimula_droidvoikko_Voikko_spell(JNIEnv * env, jobject thiz, jlong handle, jstring word) {
 	VoikkoHandle * handlePtr = reinterpret_cast<VoikkoHandle *>(handle);
 	jboolean isCopy;
 	const char * utfWord = env->GetStringUTFChars(word, &isCopy);

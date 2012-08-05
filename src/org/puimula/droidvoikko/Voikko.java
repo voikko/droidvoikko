@@ -38,6 +38,9 @@ public class Voikko {
 	}
 	
 	public boolean spell(String word) {
+		if (word == null) {
+			return true;
+		}
 		int spellResult = spell(nativeHandle, word);
 		return spellResult != 0;
 	}
