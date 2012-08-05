@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE     := libvoikko-jni
 LOCAL_CPP_FEATURES += exceptions
-LOCAL_CFLAGS := -DHAVE_MALAGA
+LOCAL_CFLAGS := -DHAVE_MALAGA -DPOSIX
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/corevoikko/libvoikko/src
 LOCAL_SRC_FILES  := \
 	voikko-jni.cpp \
