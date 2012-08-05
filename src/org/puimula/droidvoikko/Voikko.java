@@ -33,11 +33,11 @@ public class Voikko {
 	
 	final long nativeHandle;
 	
-	public Voikko(String langCode) {
-		nativeHandle = init(langCode);
+	public Voikko(String langCode, String path) {
+		nativeHandle = init(langCode, path);
 	}
 	
-	public native long init(String langCode);
+	public native long init(String langCode, String path);
 	
 	static {
 		System.loadLibrary("voikko-jni");

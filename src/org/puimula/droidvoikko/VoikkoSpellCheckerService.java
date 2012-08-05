@@ -28,6 +28,7 @@
  */
 
 package org.puimula.droidvoikko;
+import android.os.Environment;
 import android.service.textservice.SpellCheckerService;
 import android.view.textservice.SuggestionsInfo;
 import android.view.textservice.TextInfo;
@@ -45,7 +46,8 @@ public class VoikkoSpellCheckerService extends SpellCheckerService {
 		
 		@Override
 		public void onCreate() {
-			voikko = new Voikko("fi");
+			String dictionaryPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Voikko";
+			voikko = new Voikko("fi", dictionaryPath);
 		}
 		
 		@Override

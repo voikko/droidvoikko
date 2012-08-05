@@ -30,12 +30,19 @@
 #include <jni.h>
 #include "voikko.h"
 
-jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv* env, jobject thiz, jstring langCode) {
+extern "C" {
+
+jlong Java_org_puimula_droidvoikko_Voikko_init(JNIEnv* env, jobject thiz, jstring langCode, jstring path) {
 	const char * voikkoError;
-	jboolean isCopy;
-	const char * utfLang = env->GetStringUTFChars(langCode, &isCopy);
+	jboolean isCopyLang;
+	const char * utfLang = env->GetStringUTFChars(langCode, &isCopyLang);
+	jboolean isCopyPath;
+	const char * utfPath = env->GetStringUTFChars(path, &isCopyPath);
 	// TODO: handle error
-	VoikkoHandle * handle = voikkoInit(&voikkoError, utfLang, 0);
+	VoikkoHandle * handle = voikkoInit(&voikkoError, utfLang, utfPath);
+	env->ReleaseStringUTFChars(path, utfPath);
 	env->ReleaseStringUTFChars(langCode, utfLang);
 	return reinterpret_cast<jlong>(handle);
+}
+
 }
