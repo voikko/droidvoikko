@@ -28,6 +28,9 @@
  */
 
 package org.puimula.droidvoikko;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Voikko {
 	
@@ -45,9 +48,35 @@ public class Voikko {
 		return spellResult != 0;
 	}
 	
+	public List<String> suggestions(String word, int maxSuggestions) {
+		if (word == null) {
+			return Collections.emptyList();
+		}
+		long suggestionHandle = suggest(nativeHandle, word);
+		if (suggestionHandle == 0) {
+			return Collections.emptyList();
+		}
+		List<String> suggestionList = new ArrayList<String>();
+		for (int i = 0; i < maxSuggestions; i++) {
+			String suggestion = stringFromArray(suggestionHandle, i);
+			if (suggestion == null) {
+				break;
+			}
+			suggestionList.add(suggestion);
+		}
+		freeSuggestions(suggestionHandle);
+		return suggestionList;
+	}
+	
 	private native long init(String langCode, String path);
 	
 	private native int spell(long handle, String word);
+	
+	private native long suggest(long handle, String word);
+	
+	private native String stringFromArray(long array, int index);
+	
+	private native void freeSuggestions(long suggestions);
 	
 	static {
 		System.loadLibrary("voikko-jni");

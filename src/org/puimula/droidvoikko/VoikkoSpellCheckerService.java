@@ -32,6 +32,7 @@ import android.os.Environment;
 import android.service.textservice.SpellCheckerService;
 import android.view.textservice.SuggestionsInfo;
 import android.view.textservice.TextInfo;
+import java.util.List;
 
 public class VoikkoSpellCheckerService extends SpellCheckerService {
 	
@@ -52,13 +53,16 @@ public class VoikkoSpellCheckerService extends SpellCheckerService {
 		
 		@Override
 		public SuggestionsInfo onGetSuggestions(TextInfo textInfo, int suggestionsLimit) {
-			if (voikko.spell(textInfo.getText())) {
+			String word = textInfo.getText();
+			if (voikko.spell(word)) {
 				return new SuggestionsInfo(SuggestionsInfo.RESULT_ATTR_IN_THE_DICTIONARY, new String[] {});
 			}
-			return new SuggestionsInfo(
-				SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO |
-				SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS,
-				new String[] { "kissa" });
+			List<String> suggestions = voikko.suggestions(word, suggestionsLimit);
+			int resultStatus = SuggestionsInfo.RESULT_ATTR_LOOKS_LIKE_TYPO;
+			if (!suggestions.isEmpty()) {
+				resultStatus |= SuggestionsInfo.RESULT_ATTR_HAS_RECOMMENDED_SUGGESTIONS;
+			}
+			return new SuggestionsInfo(resultStatus, suggestions.toArray(new String[] {}));
 		}
 	}
 }
