@@ -54,4 +54,26 @@ jint Java_org_puimula_droidvoikko_Voikko_spell(JNIEnv * env, jobject thiz, jlong
 	return result;
 }
 
+jlong Java_org_puimula_droidvoikko_Voikko_suggest(JNIEnv * env, jobject thiz, jlong handle, jstring word) {
+	VoikkoHandle * handlePtr = reinterpret_cast<VoikkoHandle *>(handle);
+	jboolean isCopy;
+	const char * utfWord = env->GetStringUTFChars(word, &isCopy);
+	char ** result = voikkoSuggestCstr(handlePtr, utfWord);
+	env->ReleaseStringUTFChars(word, utfWord);
+	return reinterpret_cast<jlong>(result);
+}
+
+jstring Java_org_puimula_droidvoikko_Voikko_stringFromArray(JNIEnv * env, jobject thiz, jlong arrayHandle, jint index) {
+	char ** stringArray = reinterpret_cast<char **>(arrayHandle);
+	char * utfWord = stringArray[index];
+	if (utfWord) {
+		return env->NewStringUTF(utfWord);
+	}
+	return 0;
+}
+
+void Java_org_puimula_droidvoikko_Voikko_freeSuggestions(JNIEnv * env, jobject thiz, jlong arrayHandle) {
+	voikkoFreeCstrArray(reinterpret_cast<char **>(arrayHandle));
+}
+
 }
