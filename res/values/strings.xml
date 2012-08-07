@@ -28,7 +28,8 @@
  * the terms of any one of the MPL, the GPL or the LGPL.
 -->
 <resources>
-    <string name="app_name">VoikkoSpellCheckerService</string>
-    <string name="spellchecker_name">Voikko spell checker</string>
+    <string name="app_name">Voikko spell checker (Finnish)</string>
+    <string name="app_description">Android system spell checker for Finnish language</string>
+    <string name="spellchecker_name">Voikko spell checker (Finnish)</string>
     <string name="subtype_generic" translatable="false">%s</string>
 </resources>

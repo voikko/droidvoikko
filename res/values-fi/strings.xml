@@ -27,19 +27,8 @@
  * the provisions above, a recipient may use your version of this file under
  * the terms of any one of the MPL, the GPL or the LGPL.
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.puimula.droidvoikko" >
-    <uses-sdk android:minSdkVersion="14"/>
-    <application android:label="@string/app_name"
-                 android:description="@string/app_description"
-                 android:icon="@drawable/icon" >
-        <service android:label="@string/app_name"
-                 android:name=".VoikkoSpellCheckerService"
-                 android:permission="android.permission.BIND_TEXT_SERVICE" >
-            <intent-filter >
-                <action android:name="android.service.textservice.SpellCheckerService" />
-            </intent-filter>
-            <meta-data android:name="android.view.textservice.scs"
-                       android:resource="@xml/spellchecker" />
-        </service>
-    </application>
-</manifest>
+<resources>
+    <string name="app_name">Voikko-oikolukija (suomi)</string>
+    <string name="app_description">Voikkoon perustuva Android-järjestelmän oikolukukomponentti suomen kielelle</string>
+    <string name="spellchecker_name">Voikko-oikolukija (suomi)</string>
+</resources>
