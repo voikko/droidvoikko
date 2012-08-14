@@ -4,8 +4,9 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE     := libvoikko-jni
 LOCAL_CPP_FEATURES += exceptions
-LOCAL_CFLAGS := -DHAVE_MALAGA -DPOSIX
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/corevoikko/libvoikko/src
+LOCAL_CPP_EXTENSION := .cpp .cc
+LOCAL_CFLAGS := -DHAVE_MALAGA -DHAVE_HFST -DHAVE_VFST -DPOSIX
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/corevoikko/libvoikko/src $(LOCAL_PATH)/hfst
 LOCAL_SRC_FILES  := \
 	voikko-jni.cpp \
 	corevoikko/libvoikko/src/morphology/interface.cpp \
@@ -95,6 +96,12 @@ LOCAL_SRC_FILES  := \
 	corevoikko/libvoikko/src/grammar/analysis.cpp \
 	corevoikko/libvoikko/src/grammar/cache.cpp \
 	corevoikko/libvoikko/src/grammar/CacheEntry.cpp \
-	corevoikko/libvoikko/src/grammar/cachesetup.cpp
+	corevoikko/libvoikko/src/grammar/cachesetup.cpp \
+	hfst/ospell.cc hfst/ZHfstOspeller.cc hfst/ZHfstOspellerXmlMetadata.cc hfst/hfst-ol.cc \
+	corevoikko/libvoikko/src/morphology/HfstAnalyzer.cpp \
+	corevoikko/libvoikko/src/spellchecker/HfstSpeller.cpp \
+	corevoikko/libvoikko/src/spellchecker/HfstSuggestion.cpp \
+	corevoikko/libvoikko/src/hyphenator/HfstHyphenator.cpp \
+	corevoikko/libvoikko/src/morphology/VfstAnalyzer.cpp
 
 include $(BUILD_SHARED_LIBRARY)

@@ -5,4 +5,5 @@ gen
 obj
 libs
 assets
+jni/hfst
 
