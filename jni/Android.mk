@@ -5,7 +5,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE     := libvoikko-jni
 LOCAL_CPP_FEATURES += exceptions
 LOCAL_CPP_EXTENSION := .cpp .cc
-LOCAL_CFLAGS := -DHAVE_MALAGA -DHAVE_HFST -DHAVE_VFST -DPOSIX
+LOCAL_CFLAGS := -DHAVE_MALAGA -DHAVE_HFST -DHAVE_VFST -DHAVE_MMAP -DPOSIX
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/corevoikko/libvoikko/src $(LOCAL_PATH)/hfst
 LOCAL_SRC_FILES  := \
 	voikko-jni.cpp \
@@ -102,6 +102,7 @@ LOCAL_SRC_FILES  := \
 	corevoikko/libvoikko/src/spellchecker/HfstSpeller.cpp \
 	corevoikko/libvoikko/src/spellchecker/HfstSuggestion.cpp \
 	corevoikko/libvoikko/src/hyphenator/HfstHyphenator.cpp \
+	corevoikko/libvoikko/src/spellchecker/VfstSpeller.cpp \
 	corevoikko/libvoikko/src/morphology/VfstAnalyzer.cpp
 
 include $(BUILD_SHARED_LIBRARY)
